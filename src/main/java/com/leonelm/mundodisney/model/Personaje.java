@@ -1,11 +1,14 @@
 package com.leonelm.mundodisney.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table
-public class Personaje {
+public class Personaje{
     @Id
     @SequenceGenerator(
             name = "personaje_sequence",
@@ -29,13 +32,28 @@ public class Personaje {
     )
     private  Set<Pelicula> peliculasAsociadas;
 
-    public Personaje(String imagen, String nombre, int edad, float peso, String historia) {
+    public Personaje() {
+    }
+
+    public Personaje(String imagen, String nombre, int edad, float peso, String historia, Set<Pelicula> peliculasAsociadas) {
         this.imagen = imagen;
         this.nombre = nombre;
         this.edad = edad;
         this.peso = peso;
         this.historia = historia;
+        this.peliculasAsociadas = peliculasAsociadas;
     }
+
+    public Personaje(Long id, String imagen, String nombre, int edad, float peso, String historia, Set<Pelicula> peliculasAsociadas) {
+        this.id = id;
+        this.imagen = imagen;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.peso = peso;
+        this.historia = historia;
+        this.peliculasAsociadas = peliculasAsociadas;
+    }
+
 
     public Long getId() {
         return id;
@@ -93,5 +111,16 @@ public class Personaje {
         this.peliculasAsociadas = peliculasAsociadas;
     }
 
-
+    @Override
+    public String toString() {
+        return "Personaje{" +
+                "id=" + id +
+                ", imagen='" + imagen + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", edad=" + edad +
+                ", peso=" + peso +
+                ", historia='" + historia + '\'' +
+                ", peliculasAsociadas=" + peliculasAsociadas +
+                '}';
+    }
 }
