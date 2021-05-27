@@ -3,9 +3,7 @@ package com.leonelm.mundodisney.controller;
 import com.leonelm.mundodisney.model.Personaje;
 import com.leonelm.mundodisney.service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,4 +22,23 @@ public class PersonajeController {
         return personajeService.getPersonajes();
     }
 
+    @GetMapping(value = "/{id}")
+    public Personaje getDetallePersonaje(@PathVariable Long id){
+        return personajeService.getDetallePersonaje(id);
+    }
+
+    @PostMapping
+    public void createPersonaje(@RequestBody Personaje personaje ) {
+        personajeService.addNewPersonaje(personaje);
+    }
+
+    @PutMapping(path = "/{id}")
+    public void updatePersonaje(@PathVariable Long id, @RequestBody Personaje personaje){
+        personajeService.updatePersonaje(id, personaje);
+    }
+
+    @DeleteMapping
+    public void deletePersonaje(@RequestParam Long id){
+        personajeService.deletePersonaje(id);
+    }
 }

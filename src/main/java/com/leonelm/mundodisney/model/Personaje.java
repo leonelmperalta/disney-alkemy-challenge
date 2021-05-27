@@ -35,6 +35,14 @@ public class Personaje{
     public Personaje() {
     }
 
+    public Personaje(String imagen, String nombre, int edad, float peso, String historia) {
+        this.imagen = imagen;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.peso = peso;
+        this.historia = historia;
+    }
+
     public Personaje(String imagen, String nombre, int edad, float peso, String historia, Set<Pelicula> peliculasAsociadas) {
         this.imagen = imagen;
         this.nombre = nombre;
