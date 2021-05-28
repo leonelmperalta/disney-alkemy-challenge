@@ -34,11 +34,11 @@ public class PersonajeController {
 
     @PutMapping(path = "/{id}")
     public void updatePersonaje(@PathVariable Long id, @RequestBody Personaje personaje){
-        personajeService.updatePersonaje(id, personaje);
+        personajeService.updatePersonaje(id,personaje);
     }
 
-    @DeleteMapping
-    public void deletePersonaje(@RequestParam Long id){
+    @DeleteMapping(path = "/{id}")
+    public void deletePersonaje(@PathVariable Long id){
         personajeService.deletePersonaje(id);
     }
 }
