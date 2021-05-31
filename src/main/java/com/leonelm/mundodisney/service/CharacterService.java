@@ -1,7 +1,9 @@
 package com.leonelm.mundodisney.service;
 
 import com.leonelm.mundodisney.model.Character;
+import com.leonelm.mundodisney.model.Movie;
 import com.leonelm.mundodisney.repository.CharacterRepository;
+import com.leonelm.mundodisney.repository.MovieRepository;
 import com.leonelm.mundodisney.service.util.CharacterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,13 +12,16 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CharacterService {
     private final CharacterRepository characterRepository;
+    private final MovieRepository movieRepository;
     @Autowired
-    public CharacterService(CharacterRepository characterRepository){
+    public CharacterService(CharacterRepository characterRepository, MovieRepository movieRepository){
         this.characterRepository = characterRepository;
+        this.movieRepository = movieRepository;
     }
 
     public List<CharacterDTO> getCharacters(){
@@ -60,5 +65,18 @@ public class CharacterService {
         characterToUpdate.setAge(character.getAge());
         characterToUpdate.setWeigth(character.getWeigth());
         characterToUpdate.setStory(character.getStory());
+    }
+
+    @Transactional
+    public void setAsociatedMovie(Long id, Long movieId) {
+        Character characterToUpdate = characterRepository.findById(id).
+                orElseThrow(
+                        () -> new IllegalStateException("Character with id: " + id + ", dont exists in system.")
+                );
+        Movie movieToAdd = movieRepository.findById(movieId).
+                orElseThrow(
+                () ->  new IllegalStateException("Movie with id: " + id + ", dont exists in system.")
+                );
+        characterToUpdate.addAsociatedMovie(movieToAdd);
     }
 }

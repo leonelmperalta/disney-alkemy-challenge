@@ -34,12 +34,17 @@ public class CharacterController {
     }
 
     @PutMapping(path = "/{id}")
-    public void updateCharacter(@PathVariable Long id, @RequestBody Character character){
+    public void updateCharacter(@PathVariable Long id, @RequestBody Character character) {
         characterService.updateCharacter(id, character);
     }
 
     @DeleteMapping(path = "/{id}")
     public void deleteCharacter(@PathVariable Long id){
         characterService.deleteCharacter(id);
+    }
+
+    @PutMapping(path= "/setAsociatedMovie")
+    public void setAsociatedMovie(@RequestParam(value = "characterId") Long id, @RequestParam(value = "movieId") Long movieId){
+        characterService.setAsociatedMovie(id, movieId);
     }
 }

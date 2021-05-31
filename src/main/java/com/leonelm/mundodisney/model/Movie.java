@@ -1,5 +1,7 @@
 package com.leonelm.mundodisney.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
@@ -22,9 +24,11 @@ public class Movie {
     private LocalDate creationDate;
     private int qualification;
     @ManyToMany(mappedBy = "asociatedMovies")
+    @JsonIgnoreProperties("asociatedMovies")
     private Set<Character> asociatedCharacters;
     @ManyToOne
     @JoinColumn(name="idGenre")
+    @JsonIgnoreProperties("asociatedMovies")
     private Genre genre;
 
     public Movie() {
@@ -35,25 +39,6 @@ public class Movie {
         this.title = title;
         this.creationDate = creationDate;
         this.qualification = qualification;
-    }
-
-    public Movie(String url, String title, LocalDate creationDate, int qualification, Set<Character> asociatedCharacters, Genre genre) {
-        this.url = url;
-        this.title = title;
-        this.creationDate = creationDate;
-        this.qualification = qualification;
-        this.asociatedCharacters = asociatedCharacters;
-        this.genre = genre;
-    }
-
-    public Movie(Long id, String url, String title, LocalDate creationDate, int qualification, Set<Character> asociatedCharacters, Genre genre) {
-        this.id = id;
-        this.url = url;
-        this.title = title;
-        this.creationDate = creationDate;
-        this.qualification = qualification;
-        this.asociatedCharacters = asociatedCharacters;
-        this.genre = genre;
     }
 
     public Long getId() {

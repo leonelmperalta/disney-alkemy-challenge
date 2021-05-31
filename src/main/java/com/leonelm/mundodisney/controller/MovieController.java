@@ -43,5 +43,9 @@ public class MovieController {
         movieService.deleteMovie(id);
     }
 
+    @PutMapping(value = "/setGenre")
+    public void setGenre(@RequestParam("movieId") Long id, @RequestParam("genreId") Long genreId){
+        movieService.setGenre(id,genreId);
+    }
 
 }

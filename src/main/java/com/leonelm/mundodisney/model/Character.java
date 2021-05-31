@@ -1,5 +1,7 @@
 package com.leonelm.mundodisney.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -23,10 +25,11 @@ public class Character {
     private String story;
     @ManyToMany
     @JoinTable(
-            name= "performances",
+            name = "performances",
             joinColumns = @JoinColumn(name = "idCharacter"),
             inverseJoinColumns = @JoinColumn(name = "idMovie")
     )
+    @JsonIgnoreProperties("asociatedCharacters")
     private Set<Movie> asociatedMovies;
 
     public Character() {
@@ -39,26 +42,6 @@ public class Character {
         this.weigth = weigth;
         this.story = story;
     }
-
-    public Character(String url, String name, int age, float weigth, String story, Set<Movie> asociatedMovies) {
-        this.url = url;
-        this.name = name;
-        this.age = age;
-        this.weigth = weigth;
-        this.story = story;
-        this.asociatedMovies = asociatedMovies;
-    }
-
-    public Character(Long id, String url, String name, int age, float weigth, String story, Set<Movie> asociatedMovies) {
-        this.id = id;
-        this.url = url;
-        this.name = name;
-        this.age = age;
-        this.weigth = weigth;
-        this.story = story;
-        this.asociatedMovies = asociatedMovies;
-    }
-
 
     public Long getId() {
         return id;
@@ -114,6 +97,10 @@ public class Character {
 
     public void setAsociatedMovies(Set<Movie> asociatedMovies) {
         this.asociatedMovies = asociatedMovies;
+    }
+
+    public void addAsociatedMovie(Movie movie){
+        asociatedMovies.add(movie);
     }
 
     @Override
