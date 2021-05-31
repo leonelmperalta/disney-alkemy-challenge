@@ -2,11 +2,11 @@ package com.leonelm.mundodisney.controller;
 
 import com.leonelm.mundodisney.model.Movie;
 import com.leonelm.mundodisney.service.MovieService;
+import com.leonelm.mundodisney.service.util.MovieDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/movies")
@@ -18,8 +18,30 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    @GetMapping
+    public List<MovieDTO> getMovies(){
+        return movieService.getMovies();
+    }
+
     @GetMapping(value="/{id}")
     public Movie getMovieDetail(@PathVariable Long id){
         return movieService.getMovieDetail(id);
     }
+
+    @PostMapping
+    public void createMovie(@RequestBody Movie movie){
+        movieService.createMovie(movie);
+    }
+
+    @PutMapping(value = "/{id}")
+    public void updateMovie(@PathVariable Long id,@RequestBody Movie movie){
+        movieService.updateMovie(id, movie);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteMovie(@PathVariable Long id){
+        movieService.deleteMovie(id);
+    }
+
+
 }

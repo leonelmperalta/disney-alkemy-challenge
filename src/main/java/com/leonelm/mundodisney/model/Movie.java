@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(name= "movies")
 public class Movie {
     @Id
     @SequenceGenerator(
@@ -24,10 +24,17 @@ public class Movie {
     @ManyToMany(mappedBy = "asociatedMovies")
     private Set<Character> asociatedCharacters;
     @ManyToOne
-    @JoinColumn(name="idGenre",nullable = false)
+    @JoinColumn(name="idGenre")
     private Genre genre;
 
     public Movie() {
+    }
+
+    public Movie(String url, String title, LocalDate creationDate, int qualification) {
+        this.url = url;
+        this.title = title;
+        this.creationDate = creationDate;
+        this.qualification = qualification;
     }
 
     public Movie(String url, String title, LocalDate creationDate, int qualification, Set<Character> asociatedCharacters, Genre genre) {
@@ -61,20 +68,40 @@ public class Movie {
         return url;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public int getQualification() {
         return qualification;
     }
 
+    public void setQualification(int qualification) {
+        this.qualification = qualification;
+    }
+
     public Set<Character> getAsociatedCharacters() {
         return asociatedCharacters;
+    }
+
+    public void setAsociatedCharacters(Set<Character> asociatedCharacters) {
+        this.asociatedCharacters = asociatedCharacters;
     }
 
     public Genre getGenre() {

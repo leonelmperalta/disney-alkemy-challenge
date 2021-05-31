@@ -29,16 +29,24 @@ public class CharacterService {
         return charactersDTO;
     }
 
+    public Character getCharacterDetail(Long id) {
+        Character character = characterRepository.findById(id).
+                orElseThrow(
+                        () -> new IllegalStateException("Character with id: " + id + ", dont exists in system.")
+                );
+        return character;
+    }
+
     public void createCharacter(Character character) {
         characterRepository.save(character);
     }
 
     public void deleteCharacter(Long id) {
-        Optional<Character> personajeOptional = characterRepository.findById(id);
-        if(personajeOptional.isEmpty()){
+        Optional<Character> characterOptional = characterRepository.findById(id);
+        if(characterOptional.isEmpty()){
             throw new IllegalStateException("Character with id: " + id + ", dont exists in system.");
         }
-        characterRepository.delete(personajeOptional.get());
+        characterRepository.delete(characterOptional.get());
     }
 
     @Transactional
@@ -52,13 +60,5 @@ public class CharacterService {
         characterToUpdate.setAge(character.getAge());
         characterToUpdate.setWeigth(character.getWeigth());
         characterToUpdate.setStory(character.getStory());
-    }
-
-    public Character getCharacterDetail(Long id) {
-        Character character = characterRepository.findById(id).
-                orElseThrow(
-                        () -> new IllegalStateException("Character with id: " + id + ", dont exists in system.")
-                );
-        return character;
     }
 }

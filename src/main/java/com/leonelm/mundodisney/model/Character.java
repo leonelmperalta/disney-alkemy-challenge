@@ -23,11 +23,11 @@ public class Character {
     private String story;
     @ManyToMany
     @JoinTable(
-            name= "actuaciones",
+            name= "performances",
             joinColumns = @JoinColumn(name = "idCharacter"),
             inverseJoinColumns = @JoinColumn(name = "idMovie")
     )
-    private  Set<Movie> asociatedMovies;
+    private Set<Movie> asociatedMovies;
 
     public Character() {
     }
