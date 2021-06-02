@@ -36,7 +36,7 @@ public class Movie {
     @EqualsAndHashCode.Exclude
     private Set<Character> asociatedCharacters;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="idGenre")
+    @JoinColumn(name="genre_id")
     @JsonIgnoreProperties("asociatedMovies")
     @EqualsAndHashCode.Exclude
     private Genre genre;

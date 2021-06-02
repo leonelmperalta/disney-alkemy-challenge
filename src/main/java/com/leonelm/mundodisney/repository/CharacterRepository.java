@@ -12,4 +12,7 @@ import java.util.Optional;
 public interface CharacterRepository extends JpaRepository<Character, Long> {
     public List<Character> findByName(String name);
     public List<Character> findByAge(Integer age);
+
+    @Query(value = "SELECT DISTINCT c FROM Character c JOIN c.asociatedMovies a WHERE a.id = ?1")
+    List<Character> findByAsociatedMoviesWithId(Long id);
 }

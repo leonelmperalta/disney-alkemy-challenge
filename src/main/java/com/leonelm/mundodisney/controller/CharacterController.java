@@ -28,6 +28,8 @@ public class CharacterController {
             return characterService.getCharactersByName(name);
         } else if (age != null) {
             return characterService.getCharactersByAge(age);
+        } else if (movieId != null){
+            return characterService.getCharactersByMovieId(movieId);
         }
         return characterService.getCharacters();
     }

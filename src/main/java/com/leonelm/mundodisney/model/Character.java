@@ -34,8 +34,8 @@ public class Character {
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(
             name = "performances",
-            joinColumns = @JoinColumn(name = "idCharacter"),
-            inverseJoinColumns = @JoinColumn(name = "idMovie")
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     @JsonIgnoreProperties("asociatedCharacters")
     @EqualsAndHashCode.Exclude
