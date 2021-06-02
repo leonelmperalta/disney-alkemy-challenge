@@ -25,7 +25,7 @@ public class MovieController {
             @RequestParam(value="order", required = false) String order
     ){
         if(title != null && title.length() > 0){
-            return movieService.getMoviesByTitle(title);
+           return movieService.getMoviesByTitle(title);
         } else if (genreId != null) {
             return movieService.getMoviesByGenreId(genreId);
         }

@@ -3,9 +3,12 @@ package com.leonelm.mundodisney.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,9 +38,10 @@ public class Movie {
     @JsonIgnoreProperties("asociatedMovies")
     @EqualsAndHashCode.Exclude
     private Set<Character> asociatedCharacters;
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name="genre_id")
     @JsonIgnoreProperties("asociatedMovies")
     @EqualsAndHashCode.Exclude
-    private Genre genre;
+    private Genre genre = new Genre();
+
 }

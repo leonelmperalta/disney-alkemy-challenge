@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,15 +27,19 @@ public class Genre {
     private String name;
     @Column(name="url")
     private String url;
-    @OneToMany(mappedBy = "genre", cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "genre", cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("genre")
     @EqualsAndHashCode.Exclude
-    private Set<Movie> asociatedMovies;
+    private List<Movie> asociatedMovies;
 
     public Genre(){};
 
     public Genre(String name, String url) {
         this.name = name;
         this.url = url;
+    }
+
+    public void addAsociatedMovie(Movie movie){
+        this.asociatedMovies.add(movie);
     }
 }

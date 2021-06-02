@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -24,17 +26,10 @@ public class MovieService {
         this.genreRepository = genreRepository;
     }
 
-    public List<MovieDTO> mapToDTO(List<Movie> moviesList){
-        List<MovieDTO> moviesDTO = new ArrayList<MovieDTO>();
-        ModelMapper modelMapper = new ModelMapper();
-        for (Movie m:
-                moviesList) {
-            MovieDTO mDTO = new MovieDTO();
-            modelMapper.map(m, mDTO);
-            moviesDTO.add(mDTO);
-        }
-        return moviesDTO;
-    }
+    /*
+    * GET METHODS
+    */
+
 
     public List<MovieDTO> getMovies(){
         List<Movie> movies = movieRepository.findAll();
@@ -42,10 +37,9 @@ public class MovieService {
     }
 
     public List<MovieDTO> getMoviesByGenreId(Long genreId) {
-        List<Movie> movies = movieRepository.getMoviesByGenreId(genreId);
+        List<Movie> movies = movieRepository.getMoviesByGenre_Id(genreId);
         return mapToDTO(movies);
     }
-
 
     public List<MovieDTO> getMoviesByTitle(String title) {
         List<Movie> movies = movieRepository.findByTitle(title);
@@ -59,12 +53,20 @@ public class MovieService {
         return movie;
     }
 
+    /*
+    *   POST METHODS
+    */
+
     public void createMovie(Movie movie) {
         if(movie.getQualification() > 5 || movie.getQualification() < 0){
             throw new IllegalStateException("Movie qualification must be between 0 and 5.");
         }
         movieRepository.save(movie);
     }
+
+    /*
+    *   UPDATE METHODS
+    */
 
     @Transactional
     public void updateMovie(Long id, Movie movie) {
@@ -84,13 +86,6 @@ public class MovieService {
         movieToUpdate.setAsociatedCharacters(movie.getAsociatedCharacters());
     }
 
-    public void deleteMovie(Long id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(
-                () -> {throw new IllegalStateException("Movie with id: " + id + ", dont exists in system.");}
-        );
-        movieRepository.delete(movie);
-    }
-
     @Transactional
     public void setGenre(Long id, Long genreId) {
         Movie movie = movieRepository.findById(id).
@@ -102,5 +97,33 @@ public class MovieService {
                         () -> new IllegalStateException("Genre with id: " + id + ", dont exists in system.")
                 );
         movie.setGenre(genre);
+        genre.addAsociatedMovie(movie);
+    }
+
+    /*
+    * DELETE METHODS
+    */
+
+    public void deleteMovie(Long id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(
+                () -> {throw new IllegalStateException("Movie with id: " + id + ", dont exists in system.");}
+        );
+        movieRepository.delete(movie);
+    }
+
+    /*
+     * HELPERS FUNCTIONS
+     */
+
+    public List<MovieDTO> mapToDTO(List<Movie> moviesList){
+        List<MovieDTO> moviesDTO = new ArrayList<MovieDTO>();
+        ModelMapper modelMapper = new ModelMapper();
+        for (Movie m:
+                moviesList) {
+            MovieDTO mDTO = new MovieDTO();
+            modelMapper.map(m, mDTO);
+            moviesDTO.add(mDTO);
+        }
+        return moviesDTO;
     }
 }
