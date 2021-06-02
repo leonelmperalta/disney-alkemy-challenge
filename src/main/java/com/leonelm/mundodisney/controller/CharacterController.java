@@ -26,6 +26,8 @@ public class CharacterController {
             ){
         if(name != null && name.length() > 0){
             return characterService.getCharactersByName(name);
+        } else if (age != null) {
+            return characterService.getCharactersByAge(age);
         }
         return characterService.getCharacters();
     }

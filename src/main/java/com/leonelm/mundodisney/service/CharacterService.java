@@ -24,6 +24,7 @@ public class CharacterService {
         this.movieRepository = movieRepository;
     }
 
+    //HELPER FUNCTION
     public List<CharacterDTO> mapToDTO(List<Character> charactersList){
         List<CharacterDTO> charactersDTO = new ArrayList<CharacterDTO>();
         ModelMapper modelMapper = new ModelMapper();
@@ -36,6 +37,10 @@ public class CharacterService {
         return charactersDTO;
     }
 
+    /*
+    * GETTER METHODS
+    */
+
     public List<CharacterDTO> getCharacters(){
         List<Character> characters = characterRepository.findAll();
         return mapToDTO(characters);
@@ -43,6 +48,11 @@ public class CharacterService {
 
     public List<CharacterDTO> getCharactersByName(String name) {
         List<Character> characters = characterRepository.findByName(name);
+        return mapToDTO(characters);
+    }
+
+    public List<CharacterDTO> getCharactersByAge(Integer age) {
+        List<Character> characters = characterRepository.findByAge(age);
         return mapToDTO(characters);
     }
 
@@ -54,9 +64,17 @@ public class CharacterService {
         return character;
     }
 
+    /*
+    * POST METHODS
+    */
+
     public void createCharacter(Character character) {
         characterRepository.save(character);
     }
+
+    /*
+    * DELETE METHODS
+    */
 
     public void deleteCharacter(Long id) {
         Optional<Character> characterOptional = characterRepository.findById(id);
@@ -65,6 +83,10 @@ public class CharacterService {
         }
         characterRepository.delete(characterOptional.get());
     }
+
+    /*
+    * UPDATE METHODS
+    */
 
     @Transactional
     public void updateCharacter(Long id, Character character) {
