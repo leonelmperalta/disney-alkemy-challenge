@@ -20,10 +20,12 @@ import java.util.stream.Collectors;
 public class MovieService {
     private final MovieRepository movieRepository;
     private final GenreRepository genreRepository;
+    private final ModelMapper modelMapper;
     @Autowired
     public MovieService(MovieRepository movieRepository, GenreRepository genreRepository){
         this.movieRepository = movieRepository;
         this.genreRepository = genreRepository;
+        this.modelMapper = new ModelMapper();
     }
 
     /*
@@ -117,7 +119,6 @@ public class MovieService {
 
     public List<MovieDTO> mapToDTO(List<Movie> moviesList){
         List<MovieDTO> moviesDTO = new ArrayList<MovieDTO>();
-        ModelMapper modelMapper = new ModelMapper();
         for (Movie m:
                 moviesList) {
             MovieDTO mDTO = new MovieDTO();

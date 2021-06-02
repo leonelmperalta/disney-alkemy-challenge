@@ -18,23 +18,12 @@ import java.util.Optional;
 public class CharacterService {
     private final CharacterRepository characterRepository;
     private final MovieRepository movieRepository;
+    private final ModelMapper modelMapper;
     @Autowired
     public CharacterService(CharacterRepository characterRepository, MovieRepository movieRepository){
         this.characterRepository = characterRepository;
         this.movieRepository = movieRepository;
-    }
-
-    //HELPER FUNCTION
-    public List<CharacterDTO> mapToDTO(List<Character> charactersList){
-        List<CharacterDTO> charactersDTO = new ArrayList<CharacterDTO>();
-        ModelMapper modelMapper = new ModelMapper();
-        for (Character ch:
-                charactersList) {
-            CharacterDTO chDTO = new CharacterDTO();
-            modelMapper.map(ch,chDTO);
-            charactersDTO.add(chDTO);
-        }
-        return charactersDTO;
+        this.modelMapper = new ModelMapper();
     }
 
     /*
@@ -118,5 +107,21 @@ public class CharacterService {
                 () ->  new IllegalStateException("Movie with id: " + id + ", dont exists in system.")
                 );
         characterToUpdate.addAsociatedMovie(movieToAdd);
+    }
+
+    /*
+    * HELPER FUNCTIONS
+    */
+
+    //HELPER FUNCTION
+    public List<CharacterDTO> mapToDTO(List<Character> charactersList){
+        List<CharacterDTO> charactersDTO = new ArrayList<CharacterDTO>();
+        for (Character ch:
+                charactersList) {
+            CharacterDTO chDTO = new CharacterDTO();
+            modelMapper.map(ch,chDTO);
+            charactersDTO.add(chDTO);
+        }
+        return charactersDTO;
     }
 }
