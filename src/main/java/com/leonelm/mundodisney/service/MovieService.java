@@ -24,18 +24,27 @@ public class MovieService {
         this.genreRepository = genreRepository;
     }
 
-
-    public List<MovieDTO> getMovies(){
-        List<Movie> movies = movieRepository.findAll();
+    public List<MovieDTO> mapToDTO(List<Movie> moviesList){
         List<MovieDTO> moviesDTO = new ArrayList<MovieDTO>();
         ModelMapper modelMapper = new ModelMapper();
         for (Movie m:
-                movies) {
+                moviesList) {
             MovieDTO mDTO = new MovieDTO();
             modelMapper.map(m, mDTO);
             moviesDTO.add(mDTO);
         }
         return moviesDTO;
+    }
+
+    public List<MovieDTO> getMovies(){
+        List<Movie> movies = movieRepository.findAll();
+        return mapToDTO(movies);
+    }
+
+
+    public List<MovieDTO> getMoviesByTitle(String title) {
+        List<Movie> movies = movieRepository.findByTitle(title);
+        return mapToDTO(movies);
     }
 
     public Movie getMovieDetail(Long id){
@@ -90,4 +99,5 @@ public class MovieService {
                 );
         movie.setGenre(genre);
     }
+
 }

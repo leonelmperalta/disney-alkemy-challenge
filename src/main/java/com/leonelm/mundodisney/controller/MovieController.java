@@ -19,7 +19,14 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<MovieDTO> getMovies(){
+    public List<MovieDTO> getMovies(
+            @RequestParam(value="nombre", required = false) String title,
+            @RequestParam(value="idGenero", required = false) Long id,
+            @RequestParam(value="order", required = false) String order
+    ){
+        if(title != null && title.length() > 0){
+            return movieService.getMoviesByTitle(title);
+        }
         return movieService.getMovies();
     }
 
