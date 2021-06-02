@@ -38,6 +38,13 @@ public class MovieService {
         return mapToDTO(movies);
     }
 
+    public List<MovieDTO> getMovies(String order){
+        if(order.equalsIgnoreCase("asc")){
+            return mapToDTO(movieRepository.findAllByOrderByCreationDateAsc());
+        }
+        return mapToDTO(movieRepository.findAllByOrderByCreationDateDesc());
+    }
+
     public List<MovieDTO> getMoviesByGenreId(Long genreId) {
         List<Movie> movies = movieRepository.getMoviesByGenre_Id(genreId);
         return mapToDTO(movies);

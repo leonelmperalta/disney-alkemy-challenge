@@ -24,10 +24,19 @@ public class MovieController {
             @RequestParam(value="idGenero", required = false) Long genreId,
             @RequestParam(value="order", required = false) String order
     ){
-        if(title != null && title.length() > 0){
-           return movieService.getMoviesByTitle(title);
+        boolean orderIsPresent = order != null && (order.equalsIgnoreCase("asc") || order.equalsIgnoreCase("desc"));
+        /*if(title != null && title.length() > 0){
+            if(orderIsPresent){
+                movieService.getMoviesByTitle(title,order);
+            }
+            return movieService.getMoviesByTitle(title);
         } else if (genreId != null) {
+            if(orderIsPresent){
+                movieService.getMoviesByGenreId(genreId,order);
+            }
             return movieService.getMoviesByGenreId(genreId);
+        } else*/ if(orderIsPresent){
+            return movieService.getMovies(order);
         }
         return movieService.getMovies();
     }
