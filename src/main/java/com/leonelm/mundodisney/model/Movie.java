@@ -1,6 +1,8 @@
 package com.leonelm.mundodisney.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name= "movies")
+@Data
 public class Movie {
     @Id
     @SequenceGenerator(
@@ -18,95 +21,23 @@ public class Movie {
             strategy = GenerationType.SEQUENCE,
             generator = "movie_sequence"
     )
+    @Column(name = "movie_id",nullable = false)
     private Long id;
+    @Column(name= "url")
     private String url;
+    @Column(name="title")
     private String title;
+    @Column(name="creationDate")
     private LocalDate creationDate;
+    @Column(name="qualification")
     private int qualification;
-    @ManyToMany(mappedBy = "asociatedMovies")
+    @ManyToMany(mappedBy = "asociatedMovies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties("asociatedMovies")
+    @EqualsAndHashCode.Exclude
     private Set<Character> asociatedCharacters;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="idGenre")
     @JsonIgnoreProperties("asociatedMovies")
+    @EqualsAndHashCode.Exclude
     private Genre genre;
-
-    public Movie() {
-    }
-
-    public Movie(String url, String title, LocalDate creationDate, int qualification) {
-        this.url = url;
-        this.title = title;
-        this.creationDate = creationDate;
-        this.qualification = qualification;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public int getQualification() {
-        return qualification;
-    }
-
-    public void setQualification(int qualification) {
-        this.qualification = qualification;
-    }
-
-    public Set<Character> getAsociatedCharacters() {
-        return asociatedCharacters;
-    }
-
-    public void setAsociatedCharacters(Set<Character> asociatedCharacters) {
-        this.asociatedCharacters = asociatedCharacters;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", url='" + url + '\'' +
-                ", title='" + title + '\'' +
-                ", creationDate=" + creationDate +
-                ", qualification=" + qualification +
-                ", asociatedCharacters=" + asociatedCharacters +
-                ", genre=" + genre +
-                '}';
-    }
 }

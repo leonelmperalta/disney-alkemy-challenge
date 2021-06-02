@@ -1,12 +1,14 @@
 package com.leonelm.mundodisney.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name= "genres")
+@Data
 public class Genre {
     @Id
     @SequenceGenerator(
@@ -17,48 +19,12 @@ public class Genre {
             strategy = GenerationType.SEQUENCE,
             generator = "genre_sequence"
     )
+    @Column(name="genre_id",nullable = false)
     private Long id;
+    @Column(name="name")
     private String name;
+    @Column(name="url")
     private String url;
-    @OneToMany(mappedBy = "genre")
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
     private Set<Movie> asociatedMovies;
-
-    public Genre() {
-    }
-
-    public Genre(String name, String url, Set<Movie> asociatedMovies) {
-        this.name = name;
-        this.url = url;
-        this.asociatedMovies = asociatedMovies;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public Set<Movie> getAsociatedMovies() {
-        return asociatedMovies;
-    }
-
-    @Override
-    public String toString() {
-        return "Genre{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", asociatedMovies=" + asociatedMovies +
-                '}';
-    }
 }

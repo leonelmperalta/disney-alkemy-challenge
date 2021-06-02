@@ -60,10 +60,11 @@ public class CharacterService {
                 orElseThrow(
                         () -> new IllegalStateException("Character with id: " + id + ", dont exists in system.")
                 );
+        System.out.println(character);
         characterToUpdate.setName(character.getName());
         characterToUpdate.setUrl(character.getUrl());
         characterToUpdate.setAge(character.getAge());
-        characterToUpdate.setWeigth(character.getWeigth());
+        characterToUpdate.setWeight(character.getWeight());
         characterToUpdate.setStory(character.getStory());
     }
 
