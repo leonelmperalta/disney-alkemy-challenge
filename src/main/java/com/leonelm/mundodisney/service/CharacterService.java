@@ -31,23 +31,19 @@ public class CharacterService {
     */
 
     public List<CharacterDTO> getCharacters(){
-        List<Character> characters = characterRepository.findAll();
-        return mapToDTO(characters);
+        return mapToDTO(characterRepository.findAll());
     }
 
     public List<CharacterDTO> getCharactersByName(String name) {
-        List<Character> characters = characterRepository.findByName(name);
-        return mapToDTO(characters);
+        return mapToDTO(characterRepository.findByName(name));
     }
 
     public List<CharacterDTO> getCharactersByAge(Integer age) {
-        List<Character> characters = characterRepository.findByAge(age);
-        return mapToDTO(characters);
+        return mapToDTO(characterRepository.findByAge(age));
     }
 
     public List<CharacterDTO> getCharactersByMovieId(Long movieId) {
-        List<Character> characters = characterRepository.findByAsociatedMoviesWithId(movieId);
-        return mapToDTO(characters);
+        return mapToDTO(characterRepository.findByAsociatedMoviesWithId(movieId));
     }
 
     public Character getCharacterDetail(Long id) {

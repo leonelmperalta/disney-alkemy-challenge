@@ -34,8 +34,7 @@ public class MovieService {
 
 
     public List<MovieDTO> getMovies(){
-        List<Movie> movies = movieRepository.findAll();
-        return mapToDTO(movies);
+        return mapToDTO(movieRepository.findAll());
     }
 
     public List<MovieDTO> getMovies(String order){
@@ -46,8 +45,7 @@ public class MovieService {
     }
 
     public List<MovieDTO> getMoviesByGenreId(Long genreId) {
-        List<Movie> movies = movieRepository.getMoviesByGenre_Id(genreId);
-        return mapToDTO(movies);
+        return mapToDTO(movieRepository.getMoviesByGenre_Id(genreId));
     }
 
     public List<MovieDTO> getMoviesByGenreId(Long genreId, String order){
@@ -58,8 +56,14 @@ public class MovieService {
     }
 
     public List<MovieDTO> getMoviesByTitle(String title) {
-        List<Movie> movies = movieRepository.findByTitle(title);
-        return mapToDTO(movies);
+        return mapToDTO(movieRepository.findByTitle(title));
+    }
+
+    public List<MovieDTO> getMoviesByTitle(String title, String order) {
+        if(order.equalsIgnoreCase("asc")){
+            return mapToDTO(movieRepository.findByTitleOrderByCreationDateAsc(title));
+        }
+        return mapToDTO(movieRepository.findByTitleOrderByCreationDateDesc(title));
     }
 
     public Movie getMovieDetail(Long id){

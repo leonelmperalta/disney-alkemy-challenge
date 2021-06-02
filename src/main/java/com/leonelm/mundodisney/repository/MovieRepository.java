@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findByTitle(String title);
+    List<Movie> findByTitleOrderByCreationDateAsc(String title);
+    List<Movie> findByTitleOrderByCreationDateDesc(String title);
     List<Movie> getMoviesByGenre_Id(Long genreId);
     List<Movie> getMoviesByGenre_IdOrderByCreationDateAsc(Long genreId);
     List<Movie> getMoviesByGenre_IdOrderByCreationDateDesc(Long genreId);

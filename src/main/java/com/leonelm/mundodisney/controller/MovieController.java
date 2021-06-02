@@ -25,12 +25,12 @@ public class MovieController {
             @RequestParam(value="order", required = false) String order
     ){
         boolean orderIsPresent = order != null && (order.equalsIgnoreCase("asc") || order.equalsIgnoreCase("desc"));
-        /*if(title != null && title.length() > 0){
+        if(title != null && title.length() > 0){
             if(orderIsPresent){
-                movieService.getMoviesByTitle(title,order);
+                return movieService.getMoviesByTitle(title,order);
             }
             return movieService.getMoviesByTitle(title);
-        } else */ if (genreId != null) {
+        } else if (genreId != null) {
             if(orderIsPresent){
                 return movieService.getMoviesByGenreId(genreId,order);
             }
