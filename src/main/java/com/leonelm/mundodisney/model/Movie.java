@@ -31,11 +31,11 @@ public class Movie {
     private LocalDate creationDate;
     @Column(name="qualification")
     private Integer qualification;
-    @ManyToMany(mappedBy = "asociatedMovies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "asociatedMovies", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("asociatedMovies")
     @EqualsAndHashCode.Exclude
     private Set<Character> asociatedCharacters;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name="genre_id")
     @JsonIgnoreProperties("asociatedMovies")
     @EqualsAndHashCode.Exclude

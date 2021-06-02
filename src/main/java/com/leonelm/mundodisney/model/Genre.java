@@ -2,6 +2,7 @@ package com.leonelm.mundodisney.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -25,6 +26,15 @@ public class Genre {
     private String name;
     @Column(name="url")
     private String url;
-    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "genre", cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("genre")
+    @EqualsAndHashCode.Exclude
     private Set<Movie> asociatedMovies;
+
+    public Genre(){};
+
+    public Genre(String name, String url) {
+        this.name = name;
+        this.url = url;
+    }
 }

@@ -31,7 +31,7 @@ public class Character {
     private float weight;
     @Column(name="story")
     private String story;
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "performances",
             joinColumns = @JoinColumn(name = "character_id"),

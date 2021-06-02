@@ -41,6 +41,11 @@ public class MovieService {
         return mapToDTO(movies);
     }
 
+    public List<MovieDTO> getMoviesByGenreId(Long genreId) {
+        List<Movie> movies = movieRepository.getMoviesByGenreId(genreId);
+        return mapToDTO(movies);
+    }
+
 
     public List<MovieDTO> getMoviesByTitle(String title) {
         List<Movie> movies = movieRepository.findByTitle(title);
@@ -80,11 +85,10 @@ public class MovieService {
     }
 
     public void deleteMovie(Long id) {
-        Optional<Movie> movieOptional = movieRepository.findById(id);
-        if(movieOptional.isEmpty()){
-            throw new IllegalStateException("Movie with id: " + id + ", dont exists in system.");
-        }
-        movieRepository.delete(movieOptional.get());
+        Movie movie = movieRepository.findById(id).orElseThrow(
+                () -> {throw new IllegalStateException("Movie with id: " + id + ", dont exists in system.");}
+        );
+        movieRepository.delete(movie);
     }
 
     @Transactional
@@ -99,5 +103,4 @@ public class MovieService {
                 );
         movie.setGenre(genre);
     }
-
 }
