@@ -5,8 +5,10 @@ import com.leonelm.mundodisney.model.Movie;
 import com.leonelm.mundodisney.repository.CharacterRepository;
 import com.leonelm.mundodisney.repository.MovieRepository;
 import com.leonelm.mundodisney.service.util.CharacterDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -27,9 +29,12 @@ public class CharacterService {
     public List<CharacterDTO> getCharacters(){
         List<Character> characters = characterRepository.findAll();
         List<CharacterDTO> charactersDTO = new ArrayList<CharacterDTO>();
+        ModelMapper modelMapper = new ModelMapper();
         for (Character ch:
              characters) {
-            charactersDTO.add(new CharacterDTO(ch.getId(),ch.getName(),ch.getUrl()));
+            CharacterDTO chDTO = new CharacterDTO();
+            modelMapper.map(ch,chDTO);
+            charactersDTO.add(chDTO);
         }
         return charactersDTO;
     }

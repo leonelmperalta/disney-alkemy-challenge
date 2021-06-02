@@ -5,6 +5,7 @@ import com.leonelm.mundodisney.model.Movie;
 import com.leonelm.mundodisney.repository.GenreRepository;
 import com.leonelm.mundodisney.repository.MovieRepository;
 import com.leonelm.mundodisney.service.util.MovieDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +28,12 @@ public class MovieService {
     public List<MovieDTO> getMovies(){
         List<Movie> movies = movieRepository.findAll();
         List<MovieDTO> moviesDTO = new ArrayList<MovieDTO>();
+        ModelMapper modelMapper = new ModelMapper();
         for (Movie m:
                 movies) {
-            moviesDTO.add(new MovieDTO(m.getId(),m.getTitle(),m.getUrl(), m.getCreationDate()));
+            MovieDTO mDTO = new MovieDTO();
+            modelMapper.map(m, mDTO);
+            moviesDTO.add(mDTO);
         }
         return moviesDTO;
     }
