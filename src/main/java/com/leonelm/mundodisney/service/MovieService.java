@@ -4,7 +4,7 @@ import com.leonelm.mundodisney.model.Genre;
 import com.leonelm.mundodisney.model.Movie;
 import com.leonelm.mundodisney.repository.GenreRepository;
 import com.leonelm.mundodisney.repository.MovieRepository;
-import com.leonelm.mundodisney.service.util.MovieDTO;
+import com.leonelm.mundodisney.util.MovieDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

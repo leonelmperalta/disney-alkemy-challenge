@@ -2,7 +2,7 @@ package com.leonelm.mundodisney.controller;
 
 import com.leonelm.mundodisney.model.Movie;
 import com.leonelm.mundodisney.service.MovieService;
-import com.leonelm.mundodisney.service.util.MovieDTO;
+import com.leonelm.mundodisney.util.MovieDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

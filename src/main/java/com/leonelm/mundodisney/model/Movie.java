@@ -30,7 +30,7 @@ public class Movie {
     @Column(name="creationDate")
     private LocalDate creationDate;
     @Column(name="qualification")
-    private int qualification;
+    private Integer qualification;
     @ManyToMany(mappedBy = "asociatedMovies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties("asociatedMovies")
     @EqualsAndHashCode.Exclude

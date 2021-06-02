@@ -2,7 +2,7 @@ package com.leonelm.mundodisney.controller;
 
 import com.leonelm.mundodisney.model.Character;
 import com.leonelm.mundodisney.service.CharacterService;
-import com.leonelm.mundodisney.service.util.CharacterDTO;
+import com.leonelm.mundodisney.util.CharacterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,14 @@ public class CharacterController {
     }
 
     @GetMapping
-    public List<CharacterDTO> getCharacters(){
+    public List<CharacterDTO> getCharacters(
+            @RequestParam(value="nombre",required = false) String name,
+            @RequestParam(value="edad",required = false) Integer age,
+            @RequestParam(value="idMovie",required = false) Long movieId
+            ){
+        if(name != null && name.length() > 0){
+            return characterService.getCharactersByName(name);
+        }
         return characterService.getCharacters();
     }
 

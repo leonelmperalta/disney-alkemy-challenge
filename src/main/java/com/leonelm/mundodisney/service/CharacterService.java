@@ -4,17 +4,15 @@ import com.leonelm.mundodisney.model.Character;
 import com.leonelm.mundodisney.model.Movie;
 import com.leonelm.mundodisney.repository.CharacterRepository;
 import com.leonelm.mundodisney.repository.MovieRepository;
-import com.leonelm.mundodisney.service.util.CharacterDTO;
+import com.leonelm.mundodisney.util.CharacterDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class CharacterService {
@@ -26,17 +24,26 @@ public class CharacterService {
         this.movieRepository = movieRepository;
     }
 
-    public List<CharacterDTO> getCharacters(){
-        List<Character> characters = characterRepository.findAll();
+    public List<CharacterDTO> mapToDTO(List<Character> charactersList){
         List<CharacterDTO> charactersDTO = new ArrayList<CharacterDTO>();
         ModelMapper modelMapper = new ModelMapper();
         for (Character ch:
-             characters) {
+                charactersList) {
             CharacterDTO chDTO = new CharacterDTO();
             modelMapper.map(ch,chDTO);
             charactersDTO.add(chDTO);
         }
         return charactersDTO;
+    }
+
+    public List<CharacterDTO> getCharacters(){
+        List<Character> characters = characterRepository.findAll();
+        return mapToDTO(characters);
+    }
+
+    public List<CharacterDTO> getCharactersByName(String name) {
+        List<Character> characters = characterRepository.findByName(name);
+        return mapToDTO(characters);
     }
 
     public Character getCharacterDetail(Long id) {

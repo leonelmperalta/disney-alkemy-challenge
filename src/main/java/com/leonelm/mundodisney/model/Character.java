@@ -3,7 +3,6 @@ package com.leonelm.mundodisney.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -27,7 +26,7 @@ public class Character {
     @Column(name="name")
     private String name;
     @Column(name="age")
-    private int age;
+    private Integer age;
     @Column(name="weight")
     private float weight;
     @Column(name="story")
