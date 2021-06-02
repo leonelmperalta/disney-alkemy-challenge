@@ -50,6 +50,13 @@ public class MovieService {
         return mapToDTO(movies);
     }
 
+    public List<MovieDTO> getMoviesByGenreId(Long genreId, String order){
+        if(order.equalsIgnoreCase("asc")){
+            return mapToDTO(movieRepository.getMoviesByGenre_IdOrderByCreationDateAsc(genreId));
+        }
+        return mapToDTO(movieRepository.getMoviesByGenre_IdOrderByCreationDateDesc(genreId));
+    }
+
     public List<MovieDTO> getMoviesByTitle(String title) {
         List<Movie> movies = movieRepository.findByTitle(title);
         return mapToDTO(movies);

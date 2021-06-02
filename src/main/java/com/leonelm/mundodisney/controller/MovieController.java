@@ -30,12 +30,12 @@ public class MovieController {
                 movieService.getMoviesByTitle(title,order);
             }
             return movieService.getMoviesByTitle(title);
-        } else if (genreId != null) {
+        } else */ if (genreId != null) {
             if(orderIsPresent){
-                movieService.getMoviesByGenreId(genreId,order);
+                return movieService.getMoviesByGenreId(genreId,order);
             }
             return movieService.getMoviesByGenreId(genreId);
-        } else*/ if(orderIsPresent){
+        } else if(orderIsPresent){
             return movieService.getMovies(order);
         }
         return movieService.getMovies();
