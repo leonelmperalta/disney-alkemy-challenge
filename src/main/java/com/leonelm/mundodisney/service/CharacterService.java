@@ -43,7 +43,7 @@ public class CharacterService {
     }
 
     public List<CharacterDTO> getCharactersByMovieId(Long movieId) {
-        return mapToDTO(characterRepository.findByAsociatedMoviesWithId(movieId));
+        return mapToDTO(characterRepository.findByAsociatedMovies_Id(movieId));
     }
 
     public Character getCharacterDetail(Long id) {
