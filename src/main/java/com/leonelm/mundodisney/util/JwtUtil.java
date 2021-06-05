@@ -1,4 +1,5 @@
 package com.leonelm.mundodisney.util;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,7 +15,9 @@ import java.util.function.Function;
 
 public class JwtUtil {
 
-    private String SECRET_KEY = "secret";
+    Dotenv dotenv = Dotenv.load();
+
+    private final String SECRET_KEY = dotenv.get("JWT_SECRET");
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
