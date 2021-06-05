@@ -26,7 +26,6 @@ public class GenreInitialData {
             genreRepository.save(new Genre("Fantasy", "www.fantasy.com/img"));
             genreRepository.save(new Genre("Action", "www.action.com/img"));
             genreRepository.save(new Genre("Mystery", "www.mistery.com/img"));
-            userRepository.save(new User("leonel","desarrollo"));
         };
     }
 
