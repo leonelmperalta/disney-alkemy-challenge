@@ -20,8 +20,8 @@ public class MovieController {
 
     @GetMapping
     public List<MovieDTO> getMovies(
-            @RequestParam(value="nombre", required = false) String title,
-            @RequestParam(value="idGenero", required = false) Long genreId,
+            @RequestParam(value="name", required = false) String title,
+            @RequestParam(value="genreId", required = false) Long genreId,
             @RequestParam(value="order", required = false) String order
     ){
         boolean orderIsPresent = order != null && (order.equalsIgnoreCase("asc") || order.equalsIgnoreCase("desc"));

@@ -1,4 +1,4 @@
-package com.leonelm.mundodisney.util;
+package com.leonelm.mundodisney.configuration;
 
 import com.leonelm.mundodisney.model.Genre;
 import com.leonelm.mundodisney.model.User;

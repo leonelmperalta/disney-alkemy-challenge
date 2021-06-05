@@ -34,7 +34,12 @@ public class Movie {
     private LocalDate creationDate;
     @Column(name="qualification")
     private Integer qualification;
-    @ManyToMany(mappedBy = "asociatedMovies", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "performances",
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
     @JsonIgnoreProperties("asociatedMovies")
     @EqualsAndHashCode.Exclude
     private Set<Character> asociatedCharacters;
@@ -42,6 +47,6 @@ public class Movie {
     @JoinColumn(name="genre_id")
     @JsonIgnoreProperties("asociatedMovies")
     @EqualsAndHashCode.Exclude
-    private Genre genre = new Genre();
+    private Genre genre;
 
 }

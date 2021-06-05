@@ -31,12 +31,7 @@ public class Character {
     private float weight;
     @Column(name="story")
     private String story;
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "performances",
-            joinColumns = @JoinColumn(name = "character_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
+    @ManyToMany(mappedBy = "asociatedCharacters", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("asociatedCharacters")
     @EqualsAndHashCode.Exclude
     private Set<Movie> asociatedMovies;

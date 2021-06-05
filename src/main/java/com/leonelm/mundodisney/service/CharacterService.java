@@ -35,7 +35,7 @@ public class CharacterService {
     }
 
     public List<CharacterDTO> getCharactersByName(String name) {
-        return mapToDTO(characterRepository.findByName(name));
+        return mapToDTO(characterRepository.findByNameLike(name));
     }
 
     public List<CharacterDTO> getCharactersByAge(Integer age) {

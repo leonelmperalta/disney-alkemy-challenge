@@ -1,4 +1,4 @@
-package com.leonelm.mundodisney.model;
+package com.leonelm.mundodisney.util;
 
 import lombok.Data;
 

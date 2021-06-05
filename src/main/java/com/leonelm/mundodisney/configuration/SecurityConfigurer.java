@@ -1,6 +1,7 @@
-package com.leonelm.mundodisney.util;
+package com.leonelm.mundodisney.configuration;
 
 import com.leonelm.mundodisney.service.MyUserDetailsService;
+import com.leonelm.mundodisney.util.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

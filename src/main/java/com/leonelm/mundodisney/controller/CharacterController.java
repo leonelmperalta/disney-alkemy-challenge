@@ -20,9 +20,9 @@ public class CharacterController {
 
     @GetMapping
     public List<CharacterDTO> getCharacters(
-            @RequestParam(value="nombre",required = false) String name,
-            @RequestParam(value="edad",required = false) Integer age,
-            @RequestParam(value="idMovie",required = false) Long movieId
+            @RequestParam(value="name",required = false) String name,
+            @RequestParam(value="age",required = false) Integer age,
+            @RequestParam(value="movieId",required = false) Long movieId
             ){
         if(name != null && name.length() > 0){
             return characterService.getCharactersByName(name);
