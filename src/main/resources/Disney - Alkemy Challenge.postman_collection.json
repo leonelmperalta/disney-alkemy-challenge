@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "fde108b3-234f-4318-a168-c4700d4ea405",
+		"name": "Disney - Alkemy Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"username\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"username\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Characters CRUD",
+			"item": [
+				{
+					"name": "getCharacters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/characters/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "aName",
+									"description": "Any name",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "18",
+									"description": "Must be a number",
+									"disabled": true
+								},
+								{
+									"key": "movieId",
+									"value": "1",
+									"description": "Must be a int number",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCharacter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"A name for a character\",\n    \"url\": \"example/image/url\",\n    \"age\": 50,\n    \"weight\": 75.2,\n    \"story\": \"Here you tell the story of the character you want to create.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/characters/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCharacter",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"A new name for a character already created\",\n    \"url\": \"a/new/image/url\",\n    \"age\": 40,\n    \"weight\": 77.2,\n    \"story\": \"Here you can update the story of the character that you have created earlier\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/characters/{character-id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters",
+								"{character-id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCharacterDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/characters/{character-id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters",
+								"{character-id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCharacter",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/characters/{character-id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters",
+								"{character-id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setAsociatedMovie",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/characters/setAsociatedMovie?characterId=3&movieId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters",
+								"setAsociatedMovie"
+							],
+							"query": [
+								{
+									"key": "characterId",
+									"value": "3",
+									"description": "The id of the character you want to asociate to the movie"
+								},
+								{
+									"key": "movieId",
+									"value": "2",
+									"description": "The id of the movie you want to asociate to the character"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movies CRUD",
+			"item": [
+				{
+					"name": "getMovies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/movies/?name=movieName&genreId=2&order=ASC OR DESC",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "movieName"
+								},
+								{
+									"key": "genreId",
+									"value": "2"
+								},
+								{
+									"key": "order",
+									"value": "ASC OR DESC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMovie",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/movies/{character-id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"{character-id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMovie",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"newTitle\",\n    \"url\": \"img/newImage\",\n    \"creationDate\": \"2000-10-21\",\n    \"qualification\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/movies/{movie-id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"{movie-id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createMovie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Movie title\",\n    \"url\": \"img/image\",\n    \"creationDate\": \"2000-10-21\",\n    \"qualification\": 5,\n    \"asociatedCharacters\": [\n       {\n        \"name\": \"A name for a character\",\n        \"url\": \"example/image/url\",\n        \"age\": 50,\n        \"weight\": 75.2,\n        \"story\": \"Here you tell the story of the character you want to create.\"\n        }\n    ],\n    \"genre\": {\n        \"name\": \"Fantasy\",\n        \"url\": \"example/image/url\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/movies/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMovieDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/movies/{movie_id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"{movie_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setGenre",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"description": "In this field you have to place the token you received when you registered",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/movies/setGenre/?movieId=1&genreId=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"setGenre",
+								""
+							],
+							"query": [
+								{
+									"key": "movieId",
+									"value": "1",
+									"description": "The id of the movie you want to set a genre"
+								},
+								{
+									"key": "genreId",
+									"value": "1",
+									"description": "The id of the genre you want to set for the movie"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
